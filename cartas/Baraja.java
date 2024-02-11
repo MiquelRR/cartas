@@ -80,7 +80,7 @@ public class Baraja {
             graficos.put("hueco", hueco);
             graficos.put("win",win);
             fi.close();
-            noCarta= new Carta('n',0,0,graficos.get("hueco"));
+            noCarta= new Carta('n',-100,0,graficos.get("hueco"));
             Barajar(baraja);
         } catch (FileNotFoundException e) {
             e.printStackTrace();

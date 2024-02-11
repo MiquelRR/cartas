@@ -37,13 +37,13 @@ public class asciiBrisca {
                 centro[1] = humano.juegaCarta(jh);
                 muestraTapete(pan, ultima, triunfo, baraja, robot, humano, centro, false);
                 Thread.sleep(pausa);
+                brisca.setPalo(centro[1].getPalo());
                 //estrategia robot: pruebo con todas la que mas puntos gane y restan los valores de jugar
                 int[] mivalor= new int[3];
                 for (int i = 0; i < mivalor.length; i++) {
                     mivalor[i]=brisca.ganaMano(robot.mano[i],centro[1])*10-robot.mano[i].getValor();
+                    if(robot.mano[i].getPalo()=='n') mivalor[i]=-100;
                 }               
-                System.out.println(mivalor);
-                sc.nextLine();
                 jr=mejor(mivalor);
                 centro[0] = robot.juegaCarta(jr);
                 salehumano = gana(pausa, pan, centro, baraja, ultima, triunfo, brisca, robot, humano, salehumano);
@@ -51,9 +51,11 @@ public class asciiBrisca {
                 int[] mivalor= new int[3];
                 for (int i = 0; i < mivalor.length; i++) {    
                     mivalor[i]=(robot.mano[i].getValor()*-1)-((robot.mano[i].getPalo()==triunfo)?100:0);                    
-                }
+                    if(robot.mano[i].getValor()=='n') mivalor[i]=-10000;
+                } 
                 jr=mejor(mivalor); // cargado en negativo para salga lo peor
                 centro[0] =robot.juegaCarta(jr);
+                brisca.setPalo(centro[0].getPalo());
                 jh = muestraTapete(pan, ultima, triunfo, baraja, robot, humano, centro, true);
                 centro[1] = humano.juegaCarta(jh);
                 salehumano = gana(pausa, pan, centro, baraja, ultima, triunfo, brisca, robot, humano, salehumano);
@@ -141,20 +143,21 @@ public class asciiBrisca {
         col = (robot.mano[2].getValor() == 0) ? 'n' : 'w';
         pan.situa(1 + 2 * ch, v, temp, col);
         pan.situa(hor - 1 - (3 * ch), ver - cv - 2, humano.mano[0].toString(), humano.mano[0].getPalo());
-        pan.situa(hor + 1 - (3 * ch), ver - 2, "↑1↑", 'n');
+        pan.situa(hor + 1 - (3 * ch), ver - 2, "(1)", 'n');
         pan.situa(hor - 1 - (2 * ch), ver - cv - 2, humano.mano[1].toString(), humano.mano[1].getPalo());
-        pan.situa(hor + 1 - (2 * ch), ver - 2, "↑2↑", 'n');
+        pan.situa(hor + 1 - (2 * ch), ver - 2, "(2)", 'n');
         pan.situa(hor - 1 - (1 * ch), ver - cv - 2, humano.mano[2].toString(), humano.mano[2].getPalo());
-        pan.situa(hor + 1 - (1 * ch), ver - 2, "↑3↑", 'n');
+        pan.situa(hor + 1 - (1 * ch), ver - 2, "(3)", 'n');
         if(wins[0]){
             pan.situa(1, ver/2+1, baraja.getGr().get("win"), 'g');
         }
         if(wins[1]){
             pan.situa(hor-23, ver/2+1, baraja.getGr().get("win"), 'g');
         }
-
-        int rs = 9;
         wins[0]=wins[1]=false;
+
+        int rs=9;
+        
         do {
 
             pan.mostra();
