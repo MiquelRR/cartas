@@ -19,7 +19,13 @@ public class Jugador {
            this.mano[i]=Baraja.getNoCarta();
         }
     }
-    
+    public boolean conCartas(){
+        boolean concartas= false;
+        for (int i = 0; i < mano.length; i++) {
+            concartas = concartas || mano[i]!= Baraja.getNoCarta();
+        }
+        return concartas;
+    }
     //requisito 
     public boolean recibeCarta(Carta carta){
         int i=0;

@@ -7,7 +7,7 @@ public class JuegoBrisca extends JuegoDeCartas{
         this.triunfo=triunfo;
     }
     @Override
-    int ganaMano(Carta carta1, Carta carta2) {
+    public int ganaMano(Carta carta1, Carta carta2) {
         //la primera carta que se pasa es la de mano
         //devuelve puntos obtenidos,
         //en positivo si gana la carta de mano y en negativo

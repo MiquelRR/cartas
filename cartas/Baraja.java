@@ -37,11 +37,14 @@ public class Baraja {
     public boolean vacia(){
         return baraja.size()==0;
     }
+    public int quedan(){
+        return baraja.size();
+    }
 
     
     static {
         try (Scanner fi = new Scanner(new File("./cartas/cartas.txt"))) {
-            String trasera = "", traserah = "", titulo = "", hueco = "";
+            String trasera = "", traserah = "", titulo = "", hueco = "", win="";
             char[] colors = { 'g', 'r', 'c', 'v' };
             int[][] valors = {
                     { 11, 10 }, // as : puntos, valor en jugada
@@ -70,10 +73,12 @@ public class Baraja {
                 hueco += fi.nextLine() + "\n";
             traserah = fi.nextLine() + "\n" + fi.nextLine() + "\n" + fi.nextLine();
             titulo = fi.nextLine() + "\n" + fi.nextLine() + "\n" + fi.nextLine();
+            win =fi.nextLine() + "\n" + fi.nextLine();
             graficos.put("titulo", titulo);
             graficos.put("trasera", trasera);
             graficos.put("traserah", traserah);
             graficos.put("hueco", hueco);
+            graficos.put("win",win);
             fi.close();
             noCarta= new Carta('n',0,0,graficos.get("hueco"));
             Barajar(baraja);
