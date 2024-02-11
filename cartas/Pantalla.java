@@ -6,6 +6,12 @@ import java.util.Map;
 
 public class Pantalla {
     private int hor;
+    public int getHor() {
+        return hor;
+    }
+    public int getVer() {
+        return ver;
+    }
     private int ver;
     private int cx;
     private int cy;

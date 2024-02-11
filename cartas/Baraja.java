@@ -10,8 +10,12 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Baraja {
-    private Scanner sc = new Scanner(System.in);
     private static List<Carta> baraja = new ArrayList<>();
+    private static Carta noCarta;
+    public static Carta getNoCarta() {
+        return noCarta;
+    }
+
     public static Map<String, String> graficos = new HashMap<>();
     // requisito
     private static void Barajar(List<Carta> baraja) {
@@ -19,12 +23,18 @@ public class Baraja {
     }
 
     // requisito
-    public static Carta repartirCarta(List<Carta> baraja) {
+    public static Carta repartirCarta() {
         return baraja.remove(0);
     }
+    public Carta ultimaCarta() {
+        return baraja.get(baraja.size()-1);
+    }
+
     public static boolean vacia(){
         return baraja.size()==0;
     }
+
+    
     static {
         try (Scanner fi = new Scanner(new File("./cartas/cartas.txt"))) {
             String trasera = "", traserah = "", titulo = "", hueco = "";
@@ -61,6 +71,7 @@ public class Baraja {
             graficos.put("traserah", traserah);
             graficos.put("hueco", hueco);
             fi.close();
+            noCarta= new Carta('n',0,0,graficos.get("hueco"));
             Barajar(baraja);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
