@@ -17,20 +17,24 @@ public class Baraja {
     }
 
     public static Map<String, String> graficos = new HashMap<>();
+    public Map<String, String> getGr() {
+        return graficos;
+    }
+
     // requisito
     private static void Barajar(List<Carta> baraja) {
         Collections.shuffle(baraja);
     }
 
     // requisito
-    public static Carta repartirCarta() {
+    public Carta repartirCarta() {
         return baraja.remove(0);
     }
     public Carta ultimaCarta() {
         return baraja.get(baraja.size()-1);
     }
 
-    public static boolean vacia(){
+    public boolean vacia(){
         return baraja.size()==0;
     }
 
