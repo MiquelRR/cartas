@@ -19,22 +19,23 @@ public class leefich {
         Map<String,String> graficos = new HashMap<>();        
         getValors(baraja,graficos);
         Carta noCarta= new Carta('n',0,0,graficos.get("hueco"));
+        Carta trasera= new Carta('w',0,0,graficos.get("trasera"));
         //Carta[] mano = {noCarta,noCarta,noCarta};
         //Carta[] manom= {noCarta,noCarta,noCarta};
-        Carta[] mano = new Carta[3];
+        Carta[] mano = {noCarta,noCarta,noCarta};
+        Carta[] mosmaq= {noCarta,noCarta,noCarta};
         Carta[] manom= new Carta[3];
-        Collections.shuffle(baraja);
+        Barajar(baraja); // Barajar
         Carta ultima=baraja.get(baraja.size()-1);
         char triunfos=ultima.getPalo();
                
         for (int i = 0; i < 3; i++) {
-            if (mano[i]==null && baraja.size()>0 ) mano[i]=baraja.remove(0);
+            if (mano[i]==null && baraja.size()>0 ) mano[i]=repartirCarta(baraja);
         }
         for (int i = 0; i < 3; i++) {
-            if (manom[i]==null && baraja.size()>0 ) mano[i]=baraja.remove(0);
+            if (manom[i]==null && baraja.size()>0 ) mano[i]=repartirCarta(baraja);
         }
 
-        mano[0]=noCarta;
         int v=5;
         pan.situa(hor-1-(1*ch),v,ultima.toString(),triunfos);
         //pan.situa(hor+2-(1*ch),v+1,graficos.get("trasera"),'w');
@@ -67,6 +68,13 @@ public class leefich {
         sc.close();
         
 
+    }
+
+    private static void Barajar(List<Carta> baraja) {
+        Collections.shuffle(baraja);
+    }
+    private static Carta repartirCarta(List<Carta> baraja) {
+        return baraja.remove(0);
     }
 
     private static void getValors(List<Carta> baraja,Map<String, String> graficos) throws FileNotFoundException {
