@@ -9,12 +9,12 @@ import java.util.Scanner;
 import cartas.*;
 
 public class leefich {
+    public static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) throws FileNotFoundException {
         int hor=70,ver=24,ch=7,cv=6;
         int pm=0,pp=0; //puntuación
         Pantalla pan = new Pantalla(hor , ver);
-        Scanner sc = new Scanner(System.in);
         List<Carta> baraja = new ArrayList<>();
         Map<String,String> graficos = new HashMap<>();        
         getValors(baraja,graficos);
@@ -65,7 +65,7 @@ public class leefich {
             System.out.print(" ");
         }
         sc.nextLine();
-        sc.close();
+        
         
 
     }
@@ -98,7 +98,11 @@ public class leefich {
                 String ascii="";
                 for (int i = 0; i < 6; i++) ascii+=fi.nextLine()+"\n";
                 Carta c= new Carta(palo, is[0], is[1], ascii);
+                System.out.println(c);
+                System.out.println("Puntos "+c.getPuntos()+" valor "+c.getValor());
+                sc.nextLine();
                 baraja.add(c);
+
             }
         }
         for (int i = 0; i < 6; i++) trasera+=fi.nextLine()+"\n";

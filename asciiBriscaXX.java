@@ -6,7 +6,6 @@ public class asciiBrisca {
     final static int hor = 70, ver = 24, ch = 7, cv = 6;
     static Scanner sc = new Scanner(System.in);
     final static boolean wins[] = {false,false};
-    static int winlose=0; //0, ningu, 1 perds, 2 guanyes
 
     public static void main(String[] args) throws InterruptedException {
         final int pausa = 700;
@@ -62,10 +61,6 @@ public class asciiBrisca {
                 salehumano = gana(pausa, pan, centro, baraja, ultima, triunfo, brisca, robot, humano, salehumano);
             }
         }
-        
-        winlose=(humano.getPuntos()>robot.getPuntos())?2:1;
-        if(humano.getPuntos()==robot.getPuntos()) winlose=0; //empate
-        muestraTapete(pan, ultima, triunfo, baraja, robot, humano, centro, false);
 
     }
     private static boolean gana(final int pausa, Pantalla pan, Carta[] centro, Baraja baraja, Carta ultima,
@@ -77,14 +72,11 @@ public class asciiBrisca {
         tantos=brisca.ganaMano(centro[0],centro[1]);
         if (tantos>0){
             wins[0]=true;
-            tantos--;
             robot.suma(tantos);
             salehumano=false;
         } else {
             wins[1]=true;
-            tantos=Math.abs(tantos);
-            tantos--;
-            humano.suma(tantos);
+            humano.suma(tantos*-1);
             salehumano=true;
         }
         centro[0]=Baraja.getNoCarta();
@@ -161,12 +153,8 @@ public class asciiBrisca {
         }
         if(wins[1]){
             pan.situa(hor-23, ver/2+1, baraja.getGr().get("win"), 'g');
-        }               
-        wins[0]=wins[1]=false;
-        if( winlose!=0 ){
-            if(winlose==1) pan.situa((hor-39)/2, ver/2-8, baraja.getGr().get("youwin"), 'v');
-            else pan.situa((hor-45)/2, ver/2-8, baraja.getGr().get("youloose"), 'r');
         }
+        wins[0]=wins[1]=false;
 
         int rs=9;
         
@@ -178,6 +166,7 @@ public class asciiBrisca {
                 }
                 String res = sc.nextLine();
                 int idx = res.charAt(0) - 49;
+                System.out.println("-------" + idx);
                 if (idx >= 0 && idx <= 2) {
                     if (humano.mano[idx].getValor() > 0) {
                         rs = idx;

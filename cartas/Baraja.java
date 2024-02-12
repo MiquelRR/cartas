@@ -26,9 +26,13 @@ public class Baraja {
         Collections.shuffle(baraja);
     }
 
-    // requisito
+    // requisito        
     public Carta repartirCarta() {
-        return baraja.remove(0);
+        if(baraja.size()==0){
+            return noCarta;
+        } else {
+            return baraja.remove(0);
+        }
     }
     public Carta ultimaCarta() {
         return baraja.get(baraja.size()-1);
@@ -44,7 +48,7 @@ public class Baraja {
     
     static {
         try (Scanner fi = new Scanner(new File("./cartas/cartas.txt"))) {
-            String trasera = "", traserah = "", titulo = "", hueco = "", win="";
+            String trasera = "", traserah = "", titulo = "", hueco = "", win="", youwin="", youloose="";
             char[] colors = { 'g', 'r', 'c', 'v' };
             int[][] valors = {
                     { 11, 10 }, // as : puntos, valor en jugada
@@ -67,18 +71,20 @@ public class Baraja {
                     baraja.add(c);
                 }
             }
-            for (int i = 0; i < 6; i++)
-                trasera += fi.nextLine() + "\n";
-            for (int i = 0; i < 6; i++)
-                hueco += fi.nextLine() + "\n";
+            for (int i = 0; i < 6; i++) trasera += fi.nextLine() + "\n";
+            for (int i = 0; i < 6; i++) hueco += fi.nextLine() + "\n";
             traserah = fi.nextLine() + "\n" + fi.nextLine() + "\n" + fi.nextLine();
             titulo = fi.nextLine() + "\n" + fi.nextLine() + "\n" + fi.nextLine();
             win =fi.nextLine() + "\n" + fi.nextLine();
+            for (int i = 0; i < 8; i++) youwin += fi.nextLine() + "\n";
+            for (int i = 0; i < 8; i++) youloose += fi.nextLine() + "\n";
             graficos.put("titulo", titulo);
             graficos.put("trasera", trasera);
             graficos.put("traserah", traserah);
             graficos.put("hueco", hueco);
             graficos.put("win",win);
+            graficos.put("youwin", youwin);
+            graficos.put("youloose",youloose);
             fi.close();
             noCarta= new Carta('n',-100,0,graficos.get("hueco"));
             Barajar(baraja);
