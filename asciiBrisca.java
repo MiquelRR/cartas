@@ -52,7 +52,7 @@ public class asciiBrisca {
                 int[] mivalor= new int[3];
                 for (int i = 0; i < mivalor.length; i++) {    
                     mivalor[i]=(robot.mano[i].getValor()*-1)-((robot.mano[i].getPalo()==triunfo)?100:0);                    
-                    if(robot.mano[i].getValor()=='n') mivalor[i]=Integer.MIN_VALUE;
+                    if(robot.mano[i].getPalo()=='n') mivalor[i]=Integer.MIN_VALUE;
                 } 
                 jr=mejor(mivalor); // cargado en negativo para salga lo peor
                 centro[0] =robot.juegaCarta(jr);
@@ -110,6 +110,7 @@ public class asciiBrisca {
         }
     }
 
+    //hubiese estado mejor en una clase que en una funcion, pero a la próxima.
     private static int muestraTapete(Pantalla pan, Carta ultima, char triunfo, Baraja baraja,
             Jugador robot, Jugador humano, Carta[] centro, boolean pregunta) throws InterruptedException {
         String temp;
@@ -123,7 +124,6 @@ public class asciiBrisca {
         } else {
             pan.situa(hor - 1 - (1 * ch), v, ultima.toString(), triunfo);
         }
-        // pan.situa(hor+2-(1*ch),v+1,graficos.get("trasera"),'w');
         if (baraja.quedan() > 1) {
             pan.situa(hor - (1 * ch) - 3, v + 4, baraja.getGr().get("traserah"), 'w');
         }
@@ -164,8 +164,8 @@ public class asciiBrisca {
         }               
         wins[0]=wins[1]=false;
         if( winlose!=0 ){
-            if(winlose==1) pan.situa((hor-39)/2, ver/2-8, baraja.getGr().get("youwin"), 'v');
-            else pan.situa((hor-45)/2, ver/2-8, baraja.getGr().get("youloose"), 'r');
+            if(winlose==2) pan.situa((hor-39)/2, ver/2-2, baraja.getGr().get("youwin"), 'v');
+            else pan.situa((hor-45)/2, ver/2-2, baraja.getGr().get("youloose"), 'r');
         }
 
         int rs=9;

@@ -1,7 +1,5 @@
 package cartas;
 
-import java.util.Scanner;
-
 public class JuegoBrisca extends JuegoDeCartas{
 
     private char triunfo;

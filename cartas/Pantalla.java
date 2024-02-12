@@ -18,7 +18,6 @@ public class Pantalla {
     private char[][] chars;
     private char[][] cols;
     private char ultcol;
-    private static int delay =50;
 
     public Pantalla(int hor, int ver){
         this.hor = hor;
