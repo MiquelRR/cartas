@@ -196,7 +196,7 @@ public class asciiBrisca {
                 String res;
                 do {
                      res = sc.nextLine();
-                } while (res.length()>0);
+                } while (res.length()<0);
                 int idx = res.charAt(0) - 49;
                 if (idx >= 0 && idx <= 2) {
                     if (humano.mano[idx].getValor() > 0) {
