@@ -43,18 +43,23 @@ public class asciiBrisca {
                 int[] mivalor= new int[3];
                 for (int i = 0; i < mivalor.length; i++) {
                     mivalor[i]=brisca.ganaMano(robot.mano[i],centro[1])*10-robot.mano[i].getValor();
-                    if(robot.mano[i].getPalo()=='n') mivalor[i]=Integer.MIN_VALUE;
+                    if(robot.mano[i].getValor()==0) {
+                        mivalor[i]=Integer.MIN_VALUE;
+                    }
                 }               
                 jr=mejor(mivalor);
                 centro[0] = robot.juegaCarta(jr);
+
                 salehumano = gana(pausa, pan, centro, baraja, ultima, triunfo, brisca, robot, humano, salehumano);
             } else { //sale el robot elige lo que menos valga de lo que tiene
                 int[] mivalor= new int[3];
-                for (int i = 0; i < mivalor.length; i++) {    
-                    mivalor[i]=(robot.mano[i].getValor()*-1)-((robot.mano[i].getPalo()==triunfo)?100:0);                    
-                    if(robot.mano[i].getPalo()=='n') mivalor[i]=Integer.MIN_VALUE;
+                for (int i = 0; i < 3; i++) {    
+                    mivalor[i]=(robot.mano[i].getValor())+((robot.mano[i].getPalo()==triunfo)?100:0);                    
+                    if(robot.mano[i].getValor()==0){ 
+                        mivalor[i]=Integer.MAX_VALUE; // los huecos no
+                    }
                 } 
-                jr=mejor(mivalor); // cargado en negativo para salga lo peor
+                jr=peor(mivalor); // cargado en negativo para salga lo peor
                 centro[0] =robot.juegaCarta(jr);
                 brisca.setPalo(centro[0].getPalo());
                 jh = muestraTapete(pan, ultima, triunfo, baraja, robot, humano, centro, true);
@@ -109,6 +114,15 @@ public class asciiBrisca {
             return 2;
         }
     }
+    private static int peor(int[] array) {
+        if (array[0] < array[1] && array[0] < array[2]){ 
+            return 0;
+        } else if (array[1] < array[0] && array[1] < array[2]) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
 
     //hubiese estado mejor en una clase que en una funcion, pero a la próxima.
     private static int muestraTapete(Pantalla pan, Carta ultima, char triunfo, Baraja baraja,
@@ -144,12 +158,15 @@ public class asciiBrisca {
         temp = (robot.mano[0].getValor() == 0) ? baraja.getGr().get("hueco") : baraja.getGr().get("trasera");
         col = (robot.mano[0].getValor() == 0) ? 'n' : 'w';
         pan.situa(1, v, temp, col);
+        //pan.situa(1, v, robot.mano[0].toString(), robot.mano[0].getPalo());///
         temp = (robot.mano[1].getValor() == 0) ? baraja.getGr().get("hueco") : baraja.getGr().get("trasera");
         col = (robot.mano[1].getValor() == 0) ? 'n' : 'w';
         pan.situa(1 + ch, v, temp, col);
+        //pan.situa(1+ ch, v, robot.mano[1].toString(), robot.mano[1].getPalo());///
         temp = (robot.mano[2].getValor() == 0) ? baraja.getGr().get("hueco") : baraja.getGr().get("trasera");
         col = (robot.mano[2].getValor() == 0) ? 'n' : 'w';
         pan.situa(1 + 2 * ch, v, temp, col);
+        //pan.situa(1 + 2 * ch, v, robot.mano[2].toString(), robot.mano[2].getPalo());///
         pan.situa(hor - 1 - (3 * ch), ver - cv - 2, humano.mano[0].toString(), humano.mano[0].getPalo());
         pan.situa(hor + 1 - (3 * ch), ver - 2, "(1)", 'n');
         pan.situa(hor - 1 - (2 * ch), ver - cv - 2, humano.mano[1].toString(), humano.mano[1].getPalo());
@@ -176,7 +193,10 @@ public class asciiBrisca {
                 for (int i = 0; i < hor - (2 * ch) + 2; i++) {
                     System.out.print(" ");
                 }
-                String res = sc.nextLine();
+                String res;
+                do {
+                     res = sc.nextLine();
+                } while (res.length()>0);
                 int idx = res.charAt(0) - 49;
                 if (idx >= 0 && idx <= 2) {
                     if (humano.mano[idx].getValor() > 0) {
