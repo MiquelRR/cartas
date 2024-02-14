@@ -1,21 +1,18 @@
+package cartas;
+
 import java.util.Scanner;
 
-import cartas.Baraja;
-import cartas.Carta;
-import cartas.JuegoBrisca;
-import cartas.Jugador;
-import cartas.Pantalla;
 
 public class asciiBrisca {
-    final static int hor = 73, ver = 27, ch = 7, cv = 6;
+    final static int hor = 70, ver = 24, ch = 7, cv = 6;
     static Scanner sc = new Scanner(System.in);
+    
     final static boolean wins[] = {false,false};
     static int winlose=0; //0, ningu, 1 perds, 2 guanyes
 
     public static void main(String[] args) throws InterruptedException {
-        final int pausa = 700;
-        System.out.print("Preparat per al joc?");
         sc.nextLine();
+        final int pausa = 700;
         Pantalla pan = new Pantalla(hor, ver);
         Carta[] centro = { Baraja.getNoCarta(), Baraja.getNoCarta() }; // cartas en juego
         // creamos la baraja, mezclada por el msmo metodo

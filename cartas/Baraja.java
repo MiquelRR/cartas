@@ -86,7 +86,7 @@ public class Baraja {
             graficos.put("youwin", youwin);
             graficos.put("youloose",youloose);
             fi.close();
-            noCarta= new Carta('n',-100,0,graficos.get("hueco"));
+            noCarta= new Carta('n',-1000,0,graficos.get("hueco"));
             Barajar(baraja);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
