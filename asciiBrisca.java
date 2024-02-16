@@ -155,7 +155,7 @@ public class asciiBrisca {
         String stp = Integer.toString(humano.getPuntos());
         pan.situa(hor - 7 - 1 + ((7 - stp.length()) / 2), 3, stp, 'w');
         stp = Integer.toString(robot.getPuntos());
-        pan.situa(hor - 14 - 2, 1, "MÁQUINA", 'w');
+        pan.situa(hor - 14 - 2, 1, "MÀQUINA", 'w');
         pan.situa(hor - 14 - 2 + ((7 - stp.length()) / 2), 3, stp, 'w');
         pan.marc(0, 0, hor, v, 'd', 'l');
         pan.situa(2, 1, baraja.getGr().get("titulo"), 'w');
