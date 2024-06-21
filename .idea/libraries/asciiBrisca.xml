@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="asciiBrisca">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/asciiBrisca.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
