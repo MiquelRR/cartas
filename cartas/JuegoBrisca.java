@@ -2,7 +2,7 @@ package cartas;
 
 public class JuegoBrisca extends JuegoDeCartas{
 
-    private char triunfo;
+    private final char triunfo;
     private char palo='n';
 
     public void setPalo(char palo) {

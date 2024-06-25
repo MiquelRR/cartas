@@ -49,7 +49,7 @@ public class asciiBrisca {
                 int[] mivalor= new int[3];
                 for (int i = 0; i < mivalor.length; i++) {
                     mivalor[i]=brisca.ganaMano(robot.mano[i],centro[1])*10-robot.mano[i].getValor();
-                    if(robot.mano[i].getValor()==0) {
+                    if(robot.mano[i].equals(Baraja.getNoCarta())) {
                         mivalor[i]=Integer.MIN_VALUE;
                     }
                 }               
@@ -61,7 +61,7 @@ public class asciiBrisca {
                 int[] mivalor= new int[3];
                 for (int i = 0; i < 3; i++) {    
                     mivalor[i]=(robot.mano[i].getValor())+((robot.mano[i].getPalo()==triunfo)?100:0);                    
-                    if(robot.mano[i].getValor()==0){ 
+                    if(robot.mano[i].equals(Baraja.getNoCarta())){
                         mivalor[i]=Integer.MAX_VALUE; // los huecos no
                     }
                 } 
@@ -112,18 +112,18 @@ public class asciiBrisca {
     }
     
     private static int mejor(int[] array) {
-        if (array[0] > array[1] && array[0] > array[2]){ 
+        if (array[0] >= array[1] && array[0] >= array[2]){
             return 0;
-        } else if (array[1] > array[0] && array[1] > array[2]) {
+        } else if (array[1] >= array[0] && array[1] >= array[2]) {
             return 1;
         } else {
             return 2;
         }
     }
     private static int peor(int[] array) {
-        if (array[0] < array[1] && array[0] < array[2]){ 
+        if (array[0] <= array[1] && array[0] <= array[2]){
             return 0;
-        } else if (array[1] < array[0] && array[1] < array[2]) {
+        } else if (array[1] <= array[0] && array[1] <= array[2]) {
             return 1;
         } else {
             return 2;
@@ -161,16 +161,22 @@ public class asciiBrisca {
         pan.situa(2, 1, baraja.getGr().get("titulo"), 'w');
         pan.situa(hor / 2 - ch, v * 2 + 1, centro[0].toString(), centro[0].getPalo());
         pan.situa(hor / 2, v * 2 + 1, centro[1].toString(), centro[1].getPalo());
-        temp = (robot.mano[0].getValor() == 0) ? baraja.getGr().get("hueco") : baraja.getGr().get("trasera");
-        col = (robot.mano[0].getValor() == 0) ? 'n' : 'w';
+        temp = (robot.mano[0].equals(Baraja.getNoCarta())) ? baraja.getGr().get("hueco") : baraja.getGr().get("trasera");
+//DESTAPE        temp = (robot.mano[0].equals(Baraja.getNoCarta())) ? baraja.getGr().get("hueco") : robot.mano[0].toString();
+        col = (robot.mano[0].equals(Baraja.getNoCarta())) ? 'n' : 'w';
+//DESTAPE        col= robot.mano[0].getPalo();
         pan.situa(1, v, temp, col);
         //pan.situa(1, v, robot.mano[0].toString(), robot.mano[0].getPalo());///
-        temp = (robot.mano[1].getValor() == 0) ? baraja.getGr().get("hueco") : baraja.getGr().get("trasera");
-        col = (robot.mano[1].getValor() == 0) ? 'n' : 'w';
+        temp = (robot.mano[1].equals(Baraja.getNoCarta())) ? baraja.getGr().get("hueco") : baraja.getGr().get("trasera");
+//DESTAPE        temp = (robot.mano[1].equals(Baraja.getNoCarta())) ? baraja.getGr().get("hueco") : robot.mano[1].toString();
+        col = (robot.mano[1].equals(Baraja.getNoCarta())) ? 'n' : 'w';
+//DESTAPE        col= robot.mano[1].getPalo();
         pan.situa(1 + ch, v, temp, col);
         //pan.situa(1+ ch, v, robot.mano[1].toString(), robot.mano[1].getPalo());///
-        temp = (robot.mano[2].getValor() == 0) ? baraja.getGr().get("hueco") : baraja.getGr().get("trasera");
-        col = (robot.mano[2].getValor() == 0) ? 'n' : 'w';
+        temp = (robot.mano[2].equals(Baraja.getNoCarta())) ? baraja.getGr().get("hueco") : baraja.getGr().get("trasera");
+//DESTAPE        temp = (robot.mano[2].equals(Baraja.getNoCarta())) ? baraja.getGr().get("hueco") : robot.mano[2].toString();
+        col = (robot.mano[2].equals(Baraja.getNoCarta())) ? 'n' : 'w';
+//DESTAPE        col= robot.mano[2].getPalo();
         pan.situa(1 + 2 * ch, v, temp, col);
         //pan.situa(1 + 2 * ch, v, robot.mano[2].toString(), robot.mano[2].getPalo());///
         pan.situa(hor - 1 - (3 * ch), ver - cv - 2, humano.mano[0].toString(), humano.mano[0].getPalo());

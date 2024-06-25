@@ -66,6 +66,12 @@ public class Pantalla {
                 e.printStackTrace();
         }
     }
+
+    protected void clear2(){
+        System.out.print("\033[H");
+    }
+
+
     public void situa(int x, int y, String texte,char color) {
         int av=0;
         for (char c : texte.toCharArray()) {
